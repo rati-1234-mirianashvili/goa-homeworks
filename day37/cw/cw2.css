@@ -1,0 +1,11 @@
+input[type="text"] {
+    width: 100px;
+    height: 100px;
+    border-radius:100% 0% 53% 47%/100% 100% 0% 0%
+}
+
+input[type="password"] {
+    width: 100px;
+    height: 100px;
+    border-radius:100% 48% 48% 52%/100% 100% 0% 0%
+}

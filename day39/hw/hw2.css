@@ -1,0 +1,14 @@
+/* შექმენი 3 დივი რომელიც განლაგდება ჰორიზონტალურად და გადაიტანე ცენტრში */
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    gap: 20px;
+}
+.child{
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    
+}

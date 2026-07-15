@@ -1,0 +1,33 @@
+/* 4)შექმენი დივი რომელშიც კიდე 3 დივი იქნება: სამივე x ღერძის ცენტრში იქნება, ერთი y ღერძის დასაწყისში, მეორე შუაში და მესამე დასასრული */
+.parent{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.child strat{
+    width:120px;
+    height:120px;
+    color:white;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.child center{
+    width: 120px;
+    height: 120px;
+    color:black;
+    font-size: 20px;
+    border-radius:10px ;
+    
+}
+
+.child end{
+    width: 120px;
+    height:120px;
+    color:blue;
+    font-size:20px;
+    border-radius: 10px;
+}

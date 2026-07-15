@@ -1,0 +1,15 @@
+/* შექმენი საიტი თავისუფალ თემაზე, გამოიყენე ნასწავლი ყველა მასალა */
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.child{
+    width: 220px;
+    background-color: white;
+    padding: 15px;
+    border: 10px;
+}
+

@@ -1,0 +1,28 @@
+first {
+  color: blue;
+  background-color: gray;
+  font-size: 30px;
+}
+
+.p2, .p3, .p4, .p5 {
+  color: black;
+  background-color: lightyellow;
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+
+.styled {
+  color: blue;
+  background-color: gray;
+  font-size: 30px;
+}
+
+
+img {
+  width: 300px;
+  height: 200px;
+}
+body {
+  background-color: red;
+}

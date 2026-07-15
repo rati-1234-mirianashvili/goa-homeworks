@@ -1,0 +1,1 @@
+#conditional starement არის პროგრამირების ინსტრუქცია რომელიც ამოწმებს პირობას(true,false)

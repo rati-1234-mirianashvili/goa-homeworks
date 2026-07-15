@@ -1,0 +1,35 @@
+/* 3)baseline-ს დახმარებით შექმენი leaderboard იმიტაცია */
+.parent {
+    width:50%;
+    display:flex;
+    align-items: baseline;
+    gap: 20px;
+    height:100px;
+}
+
+ #first{
+    width: 50%;
+    background-color: gold;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 10px;
+}
+
+#second{
+    width: 50%;
+    background-color: gray;
+    color:white;
+    text-align:center;
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+#third{
+    width: 50%;
+    background-color: brown;
+    color: white;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 10px;
+}
