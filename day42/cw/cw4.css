@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    gap: 10px;
+}
+
+.box {
+    width: 60px;
+    height: 60px;
+    background: skyblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.one {
+    order: 3;
+}
+
+.two {
+    order: 5;
+}
+
+.three {
+    order: 2;
+}
+
+.four {
+    order: 4;
+}
+
+.five {
+    order: 1;
+}

@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    height: 300px;
+    background: lightgray;
+}
+
+.box {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+.one {
+    background: red;
+    align-self: flex-start;
+}
+
+.two {
+    background: blue;
+    align-self: center;
+}
+
+.three {
+    background: green;
+    align-self: flex-end;
+}
+
+.four {
+    background: orange;
+    align-self: center;
+}
