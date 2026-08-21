@@ -1,0 +1,22 @@
+.card {
+    width: 300px;
+    position: relative;
+}
+
+.card img {
+    width: 300px;
+    height: 250px;
+}
+
+.price {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    padding: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+}
