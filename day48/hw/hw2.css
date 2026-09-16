@@ -1,0 +1,1 @@
+/* grid-template-columns განსაზღვრავს სვეტების რაოდენობას და მათ ზომას. 1fr 1fr 1fr ნიშნავს 3 თანაბარი ზომის სვეტს. */ .container { grid-template-columns: 1fr 1fr 1fr; }

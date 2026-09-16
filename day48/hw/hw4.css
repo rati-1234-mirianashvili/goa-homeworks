@@ -1,0 +1,144 @@
+/*
+display: grid
+
+გამოიყენება ელემენტების
+სვეტებად და რიგებად დასალაგებლად.
+*/
+.container {
+    display: grid;
+
+    /*
+    3 სვეტი
+
+    1fr 1fr 1fr ნიშნავს,
+    რომ სამივე სვეტი თანაბარი ზომისაა.
+    */
+    grid-template-columns: 1fr 1fr 1fr;
+
+    /*
+    2 რიგი
+
+    თითოეული რიგის სიმაღლე 350px იქნება.
+    */
+    grid-template-rows: 350px 350px;
+
+    /* ელემენტებს შორის დაშორება */
+    gap: 20px;
+
+    /* კონტეინერის ზომა */
+    width: 85%;
+
+    /* ცენტრში მოთავსება */
+    margin: 40px auto;
+}
+
+
+/*
+ყველა ქალაქის ბარათისთვის საერთო სტილი
+*/
+.city {
+    /*
+    background-image
+
+    სურათს ვიყენებთ ელემენტის ფონად.
+    */
+    background-size: cover;
+
+    /* სურათი ცენტრში */
+    background-position: center;
+
+    /* მომრგვალებული კუთხეები */
+    border-radius: 20px;
+
+    /* ტექსტის ცენტრში მოთავსება */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* ტექსტის ფერი */
+    color: white;
+
+    /* ტექსტის ცენტრში გასწორება */
+    text-align: center;
+
+    /* ჩრდილი */
+    box-shadow: 0 5px 15px gray;
+
+    /* საჭიროა overlay-სთვის */
+    position: relative;
+
+    /* ზედმეტი ნაწილის დამალვა */
+    overflow: hidden;
+}
+
+
+/*
+მუქი გამჭვირვალე ფენა სურათზე,
+რომ ტექსტი უკეთ გამოჩნდეს.
+*/
+.city::before {
+    content: "";
+
+    position: absolute;
+
+    /* ფენა მთელ ბარათს ფარავს */
+    inset: 0;
+
+    background: rgba(0, 100, 130, 0.45);
+}
+
+
+/*
+ტექსტი overlay-ზე ზემოთ უნდა იყოს
+*/
+.city h2,
+.city p {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ქალაქების background images */
+
+.korea {
+    background-image: url("https://images.unsplash.com/photo-1538485399081-7c897d3a5a7a");
+}
+
+.tbilisi {
+    background-image: url("https://images.unsplash.com/photo-1565008576549-57569a49371d");
+}
+
+.newyork {
+    background-image: url("https://images.unsplash.com/photo-1496588152823-86ff7695e68f");
+}
+
+.paris {
+    background-image: url("https://images.unsplash.com/photo-1502602898657-3e91760cbb34");
+}
+
+.tokyo {
+    background-image: url("https://images.unsplash.com/photo-1513407030348-c983a97b98d8");
+}
+
+.dubai {
+    background-image: url("https://images.unsplash.com/photo-1512453979798-5ea266f8880c");
+}
+
+
+/* სათაურის სტილი */
+
+.city h2 {
+    font-size: 45px;
+    margin: 0;
+    font-family: Georgia, serif;
+}
+
+
+/* აღწერის სტილი */
+
+.city p {
+    font-size: 20px;
+    margin-top: 10px;
+    font-family: Georgia, serif;
+}
