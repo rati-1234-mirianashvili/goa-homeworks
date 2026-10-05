@@ -1,0 +1,13 @@
+.grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px
+}
+
+.item {
+    background-color: lightblue;
+}
+
+.item:first-child {
+    grid-area: 1 / 1 / 3 / 2;
+}
