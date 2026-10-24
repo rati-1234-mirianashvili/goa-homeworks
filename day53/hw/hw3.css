@@ -1,0 +1,31 @@
+.rect {
+  width: 100px;
+  height: 60px;
+  margin: 30px;
+  background: coral;
+  transition: transform 0.5s;
+}
+
+.rect1 {
+  transform-origin: left top;
+}
+
+.rect2 {
+  transform-origin: center;
+}
+
+.rect3 {
+  transform-origin: right bottom;
+}
+
+.rect1:hover {
+  transform: rotate(30deg);
+}
+
+.rect2:hover {
+  transform: rotate(45deg);
+}
+
+.rect3:hover {
+  transform: rotate(60deg);
+}

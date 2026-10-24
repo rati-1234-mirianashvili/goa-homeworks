@@ -1,0 +1,36 @@
+<div class="cards">
+  <div class="card">
+    <img src="https://picsum.photos/200" alt="სურათი 1">
+    <p>პირველი ბარათი</p>
+  </div>
+  <div class="card">
+    <img src="https://picsum.photos/201" alt="სურათი 2">
+    <p>მეორე ბარათი</p>
+  </div>
+  <div class="card">
+    <img src="https://picsum.photos/202" alt="სურათი 3">
+    <p>მესამე ბარათი</p>
+  </div>
+</div>
+
+<style>
+.cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  width: 200px;
+  padding: 10px;
+  background: lightblue;
+  transition: transform 0.4s;
+}
+
+.card img {
+  width: 100%;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.1);
+}
+</style>

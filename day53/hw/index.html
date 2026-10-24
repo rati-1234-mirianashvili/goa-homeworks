@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameHub</title>
+
+  <style>
+    :root {
+      --bg: #050d1b;
+      --panel: #09172b;
+      --border: #17345b;
+      --text: #eef3ff;
+      --muted: #9aafd0;
+      --purple: #5547ff;
+      --green: #19e6a0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 15px 3%;
+      border-bottom: 1px solid var(--border);
+      background: #050c18;
+    }
+
+    .brand {
+      font-size: 27px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: #7467ff;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav button {
+      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .nav button.active,
+    .primary {
+      background: linear-gradient(120deg, #5547ff, #823dff);
+    }
+
+    .search {
+      margin-left: auto;
+      width: 280px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 12px;
+      color: white;
+      background: #101e33;
+      border: 1px solid #233652;
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 225px minmax(0, 1fr) 290px;
+      gap: 14px;
+      padding: 14px 2%;
+    }
+
+    .panel {
+      background: linear-gradient(145deg, #0b1b32, #071222);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .sidebar {
+      padding: 15px;
+    }
+
+    .eyebrow {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 5px 0 10px;
+    }
+
+    .side-link {
+      display: block;
+      width: 100%;
+      padding: 11px;
+      margin: 3px 0;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-radius: 7px;
+    }
+
+    .side-link:hover,
+    .side-link.selected {
+      background: linear-gradient(90deg, #4438d8, #152d6a);
+    }
+
+    .primary {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .premium {
+      margin-top: 25px;
+      padding: 16px;
+      background: #171747;
+      border: 1px solid #3737a8;
+      border-radius: 10px;
+    }
+
+    .premium h3 {
+      color: #9284ff;
+    }
+
+    .premium p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .premium button {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background:
+        linear-gradient(90deg, #020913 0%, #020913cc 40%, #02091322 100%),
+        url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1400&q=85")
+        center / cover;
+    }
+
+    .hero-content {
+      max-width: 360px;
+    }
+
+    .tag {
+      color: #a8aaff;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      margin: 12px 0;
+      font-size: 40px;
+    }
+
+    .hero p {
+      color: #d1def5;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .stat {
+      padding: 18px 12px;
+      text-align: center;
+    }
+
+    .stat .icon {
+      font-size: 27px;
+    }
+
+    .stat strong {
+      display: block;
+      margin: 8px 0 3px;
+      font-size: 20px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .releases {
+      padding: 15px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+    }
+
+    .section-head button {
+      color: #aaa0ff;
+      background: transparent;
+      border: none;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .game-card {
+      min-width: 0;
+      overflow: hidden;
+      background: #09172a;
+      border: 1px solid #1a2d49;
+      border-radius: 9px;
+      transition: transform 0.2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: #6253ff;
+    }
+
+    .cover {
+      height: 105px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .game-info {
+      padding: 10px;
+    }
+
+    .game-info h3 {
+      margin: 0 0 7px;
+      font-size: 13px;
+    }
+
+    .genre {
+      margin-bottom: 12px;
+      color: #8da7cf;
+      font-size: 11px;
+    }
+
+    .price-row {
+      font-weight: bold;
+    }
+
+    .sale {
+      padding: 3px 6px;
+      color: #c9fff0;
+      background: #087d63;
+      border-radius: 4px;
+    }
+
+    .old {
+      margin-left: 8px;
+      color: #6e83a3;
+      text-decoration: line-through;
+    }
+
+    .new-price {
+      float: right;
+      color: var(--green);
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .login,
+    .popular {
+      padding: 16px;
+    }
+
+    .login h2,
+    .popular h2 {
+      margin-top: 0;
+    }
+
+    .login p {
+      color: #d2def4;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 9px 0;
+      padding: 11px;
+      background: #061329;
+      border: 1px solid #1b3152;
+      border-radius: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      min-width: 0;
+      color: white;
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+
+    .field button {
+      background: transparent;
+      border: none;
+    }
+
+    .login-submit {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .signup {
+      margin: 14px 0;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .signup a {
+      color: #9b8aff;
+    }
+
+    .social {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      background: #101f35;
+      border: 1px solid #1b2d49;
+      border-radius: 8px;
+    }
+
+    .popular-item {
+      display: grid;
+      grid-template-columns: 22px 48px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .rank {
+      color: #d4a8ff;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .mini-cover {
+      width: 48px;
+      height: 55px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 5px;
+    }
+
+    .popular-item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      padding: 20px 3%;
+      border-top: 1px solid var(--border);
+      color: #8299bc;
+      font-size: 12px;
+    }
+
+    @media (max-width: 1150px) {
+      .layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+      }
+
+      .right-col {
+        grid-column: 2;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .search {
+        width: 100%;
+        margin: 0;
+      }
+
+      .layout {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .sidebar {
+        min-height: auto;
+      }
+
+      .right-col {
+        display: flex;
+      }
+
+      .hero {
+        min-height: 270px;
+        padding: 20px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cover {
+        height: 90px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">🎮 Game<span>Hub</span></div>
+
+  <nav class="nav">
+    <button class="active">Home</button>
+    <button>Games</button>
+    <button>News</button>
+    <button>Community</button>
+    <button>Store</button>
+  </nav>
+
+  <label class="search">
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="Search games, genres..."
+    >
+  </label>
+</header>
+
+<div class="layout">
+
+  <aside class="panel sidebar">
+    <p class="eyebrow">BROWSE</p>
+
+    <button class="side-link selected" data-filter="All">▦ All Games</button>
+    <button class="side-link" data-filter="Action">⚔ Action</button>
+    <button class="side-link" data-filter="Adventure">◈ Adventure</button>
+    <button class="side-link" data-filter="RPG">⛨ RPG</button>
+    <button class="side-link" data-filter="Racing">🏁 Racing</button>
+    <button class="side-link" data-filter="Sports">⚽ Sports</button>
+    <button class="side-link" data-filter="Strategy">♟ Strategy</button>
+    <button class="side-link" data-filter="Simulation">⚙ Simulation</button>
+
+    <hr style="border-color:#17345b; margin:20px 0">
+
+    <p class="eyebrow">QUICK LINKS</p>
+    <button class="side-link">♡ Wishlist</button>
+    <button class="side-link">◷ Recently Played</button>
+    <button class="side-link">⚙ Settings</button>
+
+    <div class="premium">
+      <div style="font-size:30px">♛</div>
+      <h3>Go Premium</h3>
+      <p>Get exclusive games, rewards and more!</p>
+      <button class="primary">Upgrade</button>
+    </div>
+  </aside>
+
+  <main class="center">
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="tag">FEATURED GAME</span>
+        <h1>Elden Ring</h1>
+        <p>
+          A vast world full of mystery, danger
+          and unforgettable adventures.
+        </p>
+        <button class="primary">Play Now →</button>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="panel stat">
+        <div class="icon">🎮</div>
+        <strong>500+</strong>
+        <span class="muted">Games</span>
+      </div>
+
+      <div class="panel stat">
+        <div class="icon">👥</div>
+        <strong>1.2M+</strong>
+        <span class="muted">Active Players</span>
+      </div>
+
+      <div class="panel stat">
+        <div class="icon">⭐</div>
+        <strong>4.8/5</strong>
+        <span class="muted">User Rating</span>
+      </div>
+
+      <div class="panel stat">
+        <div class="icon">⚡</div>
+        <strong>24/7</strong>
+        <span class="muted">Support</span>
+      </div>
+    </section>
+
+    <section class="panel releases">
+      <div class="section-head">
+        <h2>New Releases</h2>
+        <button id="viewAll">View All →</button>
+      </div>            
+
+      <div class="games-grid" id="gamesGrid">
+
+        <article class="game-card"
+          data-name="Black Myth Wukong"
+          data-genre="Action RPG">
+          <div class="cover"
+            style="background-image:url('')">
+          </div>
+          <div class="game-info">
+            <h3>Black Myth: Wukong</h3>
+            <div class="genre">Action · RPG</div>
+            <div class="price-row">$59.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Starfield"
+          data-genre="RPG Adventure">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Starfield</h3>
+            <div class="genre">RPG · Adventure</div>
+            <div class="price-row">$69.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Horizon Forbidden West"
+          data-genre="Action Adventure">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Horizon Forbidden West</h3>
+            <div class="genre">Action · Adventure</div>
+            <div class="price-row">$59.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Cyberpunk 2077"
+          data-genre="RPG Action">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Cyberpunk 2077</h3>
+            <div class="genre">RPG · Action</div>
+            <div class="price-row">
+              <span class="sale">-50%</span>
+              <span class="old">$59.99</span>
+              <span class="new-price">$29.99</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Red Dead Redemption 2"
+          data-genre="Action Adventure">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Red Dead Redemption 2</h3>
+            <div class="genre">Action · Adventure</div>
+            <div class="price-row">$59.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="God of War Ragnarok"
+          data-genre="Action RPG">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>God of War Ragnarök</h3>
+            <div class="genre">Action · RPG</div>
+            <div class="price-row">$59.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Baldurs Gate 3"
+          data-genre="RPG Strategy">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Baldur's Gate 3</h3>
+            <div class="genre">RPG · Strategy</div>
+            <div class="price-row">$59.99</div>
+          </div>
+        </article>
+
+        <article class="game-card"
+          data-name="Forza Horizon 5"
+          data-genre="Racing Simulation">
+          <div class="cover"
+            style="background-image:url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80')">
+          </div>
+          <div class="game-info">
+            <h3>Forza Horizon 5</h3>
+            <div class="genre">Racing · Simulation</div>
+            <div class="price-row">
+              <span class="sale">-20%</span>
+              <span class="old">$59.99</span>
+              <span class="new-price">$47.99</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <p id="emptyState" class="muted"
+        style="display:none;text-align:center;padding:25px">
+        No games found.
+      </p>
+    </section>
+  </main>
+
+  <aside class="right-col">
+
+    <section class="panel login">
+      <h2>Welcome Back</h2>
+      <p>Log in to continue your journey</p>
+
+      <form id="loginForm">
+        <label class="field">
+          ✉
+          <input type="text"
+            placeholder="Email or username" required>
+        </label>
+
+        <label class="field">
+          ♙
+          <input id="password" type="password"
+            placeholder="Password" required minlength="4">
+          <button type="button" id="togglePassword">◉</button>
+        </label>
+
+        <button class="primary login-submit" type="submit">
+          Login
+        </button>
+      </form>
+
+      <div class="signup">
+        Don't have an account?
+        <a href="#" id="signupLink">Sign up</a>
+      </div>
+
+      <div style="text-align:center;margin:14px">— OR —</div>
+
+      <button class="social" type="button">
+        🌐 Continue with Google
+      </button>
+
+      <button class="social" type="button">
+        🎮 Continue with Steam
+      </button>
+
+      <p id="loginMessage" class="muted" role="status"></p>
+    </section>
+
+    <section class="panel popular">
+      <h2>Popular Games</h2>
+
+      <div class="popular-item">
+        <span class="rank">1</span>
+        <div class="mini-cover"
+          style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=150&q=80')">
+        </div>
+        <div>
+          <strong>Minecraft</strong>
+          <span class="muted">Sandbox · Adventure<br>12.4M players</span>
+        </div>
+      </div>
+
+      <div class="popular-item">
+        <span class="rank">2</span>
+        <div class="mini-cover"
+          style="background-image:url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=150&q=80')">
+        </div>
+        <div>
+          <strong>GTA V</strong>
+          <span class="muted">Action · Adventure<br>10.8M players</span>
+        </div>
+      </div>
+
+      <div class="popular-item">
+        <span class="rank">3</span>
+        <div class="mini-cover"
+          style="background-image:url('https://images.unsplash.com/photo-1542751371-6533f8f8b5c5?auto=format&fit=crop&w=150&q=80')">
+        </div>
+        <div>
+          <strong>Valorant</strong>
+          <span class="muted">Shooter · Strategy<br>8.7M players</span>
+        </div>
+      </div>
+
+      <div class="popular-item">
+        <span class="rank">4</span>
+        <div class="mini-cover"
+          style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=150&q=80')">
+        </div>
+        <div>
+          <strong>Call of Duty: Warzone</strong>
+          <span class="muted">Shooter · Action<br>7.1M players</span>
+        </div>
+      </div>
+
+      <div class="popular-item">
+        <span class="rank">5</span>
+        <div class="mini-cover"
+          style="background-image:url('https://images.unsplash.com/photo-1493711662062-fa541f021c3b?auto=format&fit=crop&w=150&q=80')">
+        </div>
+        <div>
+          <strong>Fortnite</strong>
+          <span class="muted">Battle Royale<br>6.5M players</span>
+        </div>
+      </div>
+    </section>
+
+  </aside>
+</div>
+
+<footer class="footer">
+  <strong>🎮 Game<span style="color:#7b72ff">Hub</span></strong>
+  <span>About · Terms of Service · Privacy Policy · Contact</span>
+  <span>© 2026 GameHub. All rights reserved.</span>
+</footer>
+
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const cards = [...document.querySelectorAll(".game-card")];
+  const filterButtons = [
+    ...document.querySelectorAll("[data-filter]")
+  ];
+
+  const emptyState = document.getElementById("emptyState");
+  let activeFilter = "All";
+
+  function filterGames() {
+    const query = searchInput.value.trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const name = card.dataset.name.toLowerCase();
+      const genre = card.dataset.genre.toLowerCase();
+
+      const matchesText =
+        name.includes(query) || genre.includes(query);
+
+      const matchesGenre =
+        activeFilter === "All" ||
+        card.dataset.genre.split(" ").includes(activeFilter);
+
+      const show = matchesText && matchesGenre;
+
+      card.style.display = show ? "" : "none";
+
+      if (show) visible++;
+    });
+
+    emptyState.style.display = visible ? "none" : "block";
+  }
+
+  searchInput.addEventListener("input", filterGames);
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+
+      filterButtons.forEach(item => {
+        item.classList.toggle("selected", item === button);
+      });
+
+      filterGames();
+    });
+  });
+
+  document.getElementById("togglePassword")
+    .addEventListener("click", () => {
+      const password = document.getElementById("password");
+
+      password.type =
+        password.type === "password" ? "text" : "password";
+    });
+
+  document.getElementById("loginForm")
+    .addEventListener("submit", event => {
+      event.preventDefault();
+
+      document.getElementById("loginMessage").textContent =
+        "ეს დემო ფორმაა. რეალური ავტორიზაციისთვის საჭიროა სერვერი.";
+    });
+
+  document.getElementById("signupLink")
+    .addEventListener("click", event => {
+      event.preventDefault();
+
+      document.getElementById("loginMessage").textContent =
+        "რეგისტრაციისთვის საჭიროა backend-ის დამატება.";
+    });
+
+  document.getElementById("viewAll")
+    .addEventListener("click", () => {
+      activeFilter = "All";
+      searchInput.value = "";
+
+      filterButtons.forEach(button => {
+        button.classList.toggle(
+          "selected",
+          button.dataset.filter === "All"
+        );
+      });
+
+      filterGames();
+    });
+
+  document.querySelectorAll(".nav button")
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".nav button")
+          .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+      });
+    });
+</script>
+
+</body>
+</html>

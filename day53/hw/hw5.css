@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  padding: 12px 20px;
+  background: blue;
+  color: white;
+  border: none;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+button:hover {
+  background: orange;
+  transform: scale(1.1) translateY(-5px);
+}
