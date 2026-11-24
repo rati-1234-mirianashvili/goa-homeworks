@@ -1,0 +1,1 @@
+console.log("My name is " + "Rati" + ", I am " + "16" + " years old and I was born in " + "2010" + ".");
